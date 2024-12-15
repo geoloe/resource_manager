@@ -16,17 +16,8 @@ The **Ressource Manager** is a custom plugin for **OpenSearch Dashboards** desig
 
 ## Installation
 
-1. Clone the repository or download the plugin files.
-2. Copy the plugin into the `plugins` directory of your OpenSearch Dashboards installation.
-3. Install the necessary dependencies:
-   ```bash
-   yarn install
-   ```
-4. Build the plugin:
-   ```bash
-   yarn build
-   ```
-5. Start or restart your OpenSearch Dashboards instance.
+1. sudo bin/opensearch-dashboards-plugin install <plugin-name>
+2. Restart opensearch-dashboards.service
 
 ## Usage
 
