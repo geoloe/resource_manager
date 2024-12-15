@@ -16,7 +16,7 @@ The **Ressource Manager** is a custom plugin for **OpenSearch Dashboards** desig
 
 ## Installation
 
-1. sudo bin/opensearch-dashboards-plugin install <plugin-name>
+1. sudo bin/opensearch-dashboards-plugin install https://github.com/geoloe/ressource_manager/blob/main/build/ressourceManager-2.18.0.0.zip
 2. Restart opensearch-dashboards.service
 
 ## Usage
