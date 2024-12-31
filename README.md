@@ -1,8 +1,8 @@
-# Ressource Manager for OpenSearch Dashboards
+# Resource Manager for OpenSearch Dashboards
 
 ## Overview
 
-The **Ressource Manager** is a custom plugin for **OpenSearch Dashboards** designed to add a navigation option to set live ressource monitoring.
+The **Resource Manager** is a custom plugin for **OpenSearch Dashboards** designed to add a navigation option to set live resource monitoring.
 
 ## Features
 
@@ -16,12 +16,12 @@ The **Ressource Manager** is a custom plugin for **OpenSearch Dashboards** desig
 
 ## Installation
 
-1. sudo bin/opensearch-dashboards-plugin install https://github.com/geoloe/ressource_manager/raw/refs/heads/main/build/ressourceManager-2.18.0.0.zip
+1. sudo bin/opensearch-dashboards-plugin install https://github.com/geoloe/resource_manager/raw/refs/heads/main/build/resourceManager-2.18.0.0.zip
 2. Restart opensearch-dashboards.service
 
 ## Usage
 
-Once the plugin is installed and OpenSearch Dashboards is running, the **Ressource Manager** will automatically be active. Navigate to Ressource Manager on the sidebar. The plugin operates by using the server backend to fetch information live.
+Once the plugin is installed and OpenSearch Dashboards is running, the **Resource Manager** will automatically be active. Navigate to Resource Manager on the sidebar. The plugin operates by using the server backend to fetch information live.
 
 ## Development
 
