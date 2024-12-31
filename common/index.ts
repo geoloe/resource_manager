@@ -1,2 +1,2 @@
-export const PLUGIN_ID = 'ressourceManager';
-export const PLUGIN_NAME = 'Ressource Manager';
+export const PLUGIN_ID = 'resourceManager';
+export const PLUGIN_NAME = 'Resource Manager';

@@ -1,10 +1,10 @@
 import { NavigationPublicPluginStart } from '../../../src/plugins/navigation/public';
 
-export interface RessourceManagerPluginSetup {
+export interface ResourceManagerPluginSetup {
   getGreeting: () => string;
 }
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface RessourceManagerPluginStart {}
+export interface ResourceManagerPluginStart {}
 
 export interface AppPluginStartDependencies {
   navigation: NavigationPublicPluginStart;

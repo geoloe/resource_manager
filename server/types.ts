@@ -1,4 +1,4 @@
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface RessourceManagerPluginSetup {}
+export interface ResourceManagerPluginSetup {}
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface RessourceManagerPluginStart {}
+export interface ResourceManagerPluginStart {}
