@@ -201,4 +201,41 @@ export const defineRoutes = (router: IRouter) => {
       }
     }
   );  
+
+  // Route to fetch the logged-in user's roles
+  router.get(
+    {
+      path: '/api/cluster_resource_monitor/user_roles',
+      validate: false,
+    },
+    async (context, request, response) => {
+      try {
+        // Fetch the logged-in user's info
+        const { body: authInfo } = await context.core.opensearch.client.asCurrentUser.transport.request({
+          method: 'GET',
+          path: '/_plugins/_security/authinfo',
+        });
+
+        // Extract user roles and other relevant information
+        const userName = authInfo.user_name || 'unknown';
+        const backendRoles = authInfo.backend_roles || [];
+        const roles = authInfo.roles || [];
+        const tenants = authInfo.tenants || {};
+
+        return response.ok({
+          body: {
+            user: userName,
+            backend_roles: backendRoles,
+            roles: roles,
+            tenants: tenants,
+          },
+        });
+      } catch (error) {
+        return response.customError({
+          statusCode: error.statusCode || 500,
+          body: `Error fetching user roles: ${error.message || error}`,
+        });
+      }
+    }
+  );
 }

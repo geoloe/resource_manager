@@ -23,6 +23,54 @@ The **Resource Manager** is a custom plugin for **OpenSearch Dashboards** design
 
 Once the plugin is installed and OpenSearch Dashboards is running, the **Resource Manager** will automatically be active. Navigate to Resource Manager on the sidebar. The plugin operates by using the server backend to fetch information live.
 
+## Security
+
+The navigation menu will only be available to all users that don't have the cu-role-* attached to it. So that only admins can use it.
+
+If you wish to change this just change it here in the public plugin.tsx file and recompile the .zip.
+
+```jsx
+const rolePattern = /^cu-role-.*$/; // Regex to match roles starting with 'cu-' and ending with '-role'
+```
+
+You can also leave it completely to be always available:
+
+```jsx
+  const hasRequiredRole = async (): Promise<boolean> => {
+    return core.http
+      .get('/api/cluster_resource_monitor/user_roles')
+      .then((response: any) => {
+        const roles = response.roles || [];
+        const rolePattern = /^cu-role-.*$/; // Regex to match roles starting with 'cu-' and ending with '-role'
+        return roles.some((role: string) => rolePattern.test(role)); // Check if any role matches the pattern
+      })
+      .catch(() => false); // Handle errors gracefully
+  };
+
+    // Check if the user has the required role
+    const isUnauthorizedUser = await hasRequiredRole();
+
+    if (!isUnauthorizedUser) {
+      // Register the application in the side navigation menu
+      core.application.register({
+        id: 'resourceManager',
+        title: PLUGIN_NAME,
+        async mount(params: AppMountParameters) {
+          // Get start services as specified in opensearch_dashboards.json
+          const [coreStart, depsStart] = await core.getStartServices();
+
+          // Render the application
+          const unmount = renderApp(coreStart, depsStart as AppPluginStartDependencies, params);
+
+          // Return a cleanup function (AppUnmount) to be called when the app is unmounted
+          return () => {
+            unmount(); // Call any unmount logic from renderApp if it's provided
+          };
+        },
+      });
+    }
+```
+
 ## Development
 
 To modify and test the plugin locally:
