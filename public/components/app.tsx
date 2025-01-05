@@ -12,14 +12,6 @@ import {
   EuiSelect,
   EuiHealth
 } from '@elastic/eui';
-import '@elastic/eui/dist/eui_theme_light.css'; // Import EUI styles
-
-interface NodeStats {
-  nodeName: string;
-  cpuUsage: number;
-  memoryUsage: number;
-  diskUsage: number;
-}
 
 interface NodeStats {
   nodeName: string;
