@@ -25,32 +25,32 @@ Once the plugin is installed and OpenSearch Dashboards is running, the **Resourc
 
 ## Security
 
-The navigation menu will only be available to all users that don't have the cu-role-* attached to it. So that only admins can use it.
+The navigation menu will only be available to all users that have the all_access attached to it. So that only admins can use it.
 
 If you wish to change this just change it here in the public plugin.tsx file and recompile the .zip.
 
 ```jsx
-const rolePattern = /^cu-role-.*$/; // Regex to match roles starting with 'cu-' and ending with '-role'
+roles.includes('all_access')
 ```
 
-You can also leave it completely to be always available:
+For role access changes, you can adapt this part. Depending on your needs:
 
 ```jsx
-  const hasRequiredRole = async (): Promise<boolean> => {
-    return core.http
-      .get('/api/cluster_resource_monitor/user_roles')
-      .then((response: any) => {
-        const roles = response.roles || [];
-        const rolePattern = /^cu-role-.*$/; // Regex to match roles starting with 'cu-' and ending with '-role'
-        return roles.some((role: string) => rolePattern.test(role)); // Check if any role matches the pattern
-      })
-      .catch(() => false); // Handle errors gracefully
-  };
+    // Function to check if the user has the 'all_access' role
+    const hasAllAccessRole = async (): Promise<boolean> => {
+      return core.http
+        .get('/api/cluster_resource_monitor/user_roles')
+        .then((response: any) => {
+          const roles = response.roles || [];
+          return roles.includes('all_access'); // Check if 'all_access' role is present
+        })
+        .catch(() => false); // Handle errors gracefully
+    };
 
     // Check if the user has the required role
-    const isUnauthorizedUser = await hasRequiredRole();
+    const hasAccess = await hasAllAccessRole();
 
-    if (!isUnauthorizedUser) {
+    if (hasAccess) {
       // Register the application in the side navigation menu
       core.application.register({
         id: 'resourceManager',
